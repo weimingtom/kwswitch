@@ -119,3 +119,76 @@ public class KwSwitchLogServiceImpl {
 //    }
 
 }
+
+
+//@Service
+//public class KwSwitchLogServiceImpl {
+//    /**
+//     * 查询所有
+//     *
+//     * @rturn
+//     */
+//    public List<KwSwitchLog> findAll() {
+//        return null;
+//    }
+//
+//    /**
+//     * 根据设备ID查询数据
+//     *
+//     * @param deviceId
+//     * @return
+//     */
+//    public List<KwSwitchLog> getKwSwitchLogByDeviceId(Long deviceId) {
+//        return null;
+//    }
+//
+//    /**
+//     * 根据ID查询数据
+//     *
+//     * @param id
+//     * @return
+//     */
+//    public KwSwitchLog getKwSwitchLogById(String id) {
+//        return null;
+//    }
+//
+//    /**
+//     * 保存对象
+//     *
+//     * @param kwSwitchLog
+//     * @return
+//     */
+//    public String saveObj(KwSwitchLog kwSwitchLog) {
+//        return "save success";
+//    }
+//
+//    /**
+//     * 更新对象
+//     *
+//     * @param kwSwitchLog
+//     * @return
+//     */
+//    public String updateKwSwitchLog(KwSwitchLog kwSwitchLog) {
+//        return "success-update";
+//    }
+//
+//    /**
+//     * 删除对象
+//     *
+//     * @param kwSwitchLog
+//     * @return
+//     */
+//    public String deleteKwSwitchLog(KwSwitchLog kwSwitchLog) {
+//        return "success";
+//    }
+//
+//    /**
+//     * 根据ID删除对象
+//     *
+//     * @param id
+//     * @return
+//     */
+//    public String deleteKwSwitchLogById(String id) {
+//        return "success-delete";
+//    }
+//}

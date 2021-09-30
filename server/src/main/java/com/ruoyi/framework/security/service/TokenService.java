@@ -46,8 +46,9 @@ public class TokenService
 
     private static final Long MILLIS_MINUTE_TEN = 20 * 60 * 1000L;
 
-    @Autowired
-    private RedisCache redisCache;
+//    @Autowired
+//    private RedisCache redisCache;
+    private Map<String, LoginUser> redisCacheMap = new HashMap<>();
 
     /**
      * 获取用户身份信息
@@ -64,7 +65,8 @@ public class TokenService
             // 解析对应的权限以及用户信息
             String uuid = (String) claims.get(Constants.LOGIN_USER_KEY);
             String userKey = getTokenKey(uuid);
-            LoginUser user = redisCache.getCacheObject(userKey);
+//            LoginUser user = redisCache.getCacheObject(userKey);
+            LoginUser user = redisCacheMap.get(userKey);
             return user;
         }
         return null;
@@ -89,7 +91,8 @@ public class TokenService
         if (StringUtils.isNotEmpty(token))
         {
             String userKey = getTokenKey(token);
-            redisCache.deleteObject(userKey);
+//            redisCache.deleteObject(userKey);
+            redisCacheMap.remove(userKey);
         }
     }
 
@@ -114,7 +117,7 @@ public class TokenService
     /**
      * 验证令牌有效期，相差不足20分钟，自动刷新缓存
      * 
-     * @param token 令牌
+     * @param loginUser 用户
      * @return 令牌
      */
     public void verifyToken(LoginUser loginUser)
@@ -138,7 +141,8 @@ public class TokenService
         loginUser.setExpireTime(loginUser.getLoginTime() + expireTime * MILLIS_MINUTE);
         // 根据uuid将loginUser缓存
         String userKey = getTokenKey(loginUser.getToken());
-        redisCache.setCacheObject(userKey, loginUser, expireTime, TimeUnit.MINUTES);
+//        redisCache.setCacheObject(userKey, loginUser, expireTime, TimeUnit.MINUTES);
+        redisCacheMap.put(userKey, loginUser);
     }
     
     /**

@@ -64,6 +64,11 @@ public class MqttSenderConfig {
         // 设置会话心跳时间 单位为秒 服务器会每隔1.5*20秒的时间向客户端发送心跳判断客户端是否在线
         // 但这个方法并没有重连的机制
         options.setKeepAliveInterval(20);
+        //-----------
+        options.setConnectionTimeout(1);
+        options.setKeepAliveInterval(200000);
+        options.setAutomaticReconnect(false);
+        //-----------
         // 设置“遗嘱”消息的话题，若客户端与服务器之间的连接意外中断，服务器将发布客户端的“遗嘱”消息。
         //options.setWill("willTopic", WILL_DATA, 2, false);
         return options;
