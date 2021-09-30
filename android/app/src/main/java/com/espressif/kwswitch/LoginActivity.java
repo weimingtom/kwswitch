@@ -25,7 +25,6 @@ import com.espressif.kwswitch.common.ReceiverData;
 public class LoginActivity extends AppCompatActivity {
 
     private Button buttonLogin;
-    private ImageButton buttonCapture;
     private ImageButton buttonClose;
     private EditText accountTxt;
     private EditText passwordTxt;
@@ -54,7 +53,7 @@ public class LoginActivity extends AppCompatActivity {
             public void handleMessage(Message msg) {
                 if (msg.what == 0) {
                     ReceiverData data = (ReceiverData) msg.obj;
-                    buttonCapture.setImageBitmap(data.getBitmap());
+                    // buttonCapture.setImageBitmap(data.getBitmap());
                     uuid = data.getUuid();
                 } else if (msg.what == 1) {
                     ReceiverData data = (ReceiverData) msg.obj;
@@ -67,13 +66,10 @@ public class LoginActivity extends AppCompatActivity {
         getSupportActionBar().hide();
         setContentView(R.layout.activity_login);
 
-        buttonCapture = (ImageButton) findViewById(R.id.captureBtn);
         buttonLogin = (Button) findViewById(R.id.loginBtn);
-        buttonCapture = (ImageButton) findViewById(R.id.captureBtn);
         buttonClose = (ImageButton) findViewById(R.id.closeBtn);
         accountTxt = (EditText) findViewById(R.id.accountTxt);
         passwordTxt = (EditText) findViewById(R.id.passwordTxt);
-        captchaTxt = (EditText) findViewById(R.id.captchaTxt);
         rememberChk = (CheckBox) findViewById(R.id.rememberChk);
         //获取preferences和editor对象
         preferences = getSharedPreferences("UserInfo", MODE_PRIVATE);
@@ -101,14 +97,6 @@ public class LoginActivity extends AppCompatActivity {
 
         //获取验证码
         apiHelper.getCodeImg(handler);
-        //刷新验证码
-        buttonCapture.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //获取新的验证码
-                apiHelper.getCodeImg(handler);
-            }
-        });
 
         //关闭
         buttonClose.setOnClickListener(new View.OnClickListener() {
@@ -128,7 +116,7 @@ public class LoginActivity extends AppCompatActivity {
                 //判断密码、账号和验证码不为空
                 username = accountTxt.getText().toString().trim();
                 password = passwordTxt.getText().toString().trim();
-                String code = captchaTxt.getText().toString().trim();
+                String code = "kwswitch";
                 if (username.length() != 0 && password.length() != 0 && code.length() != 0) {
                     //调用登录接口
                     apiHelper.loginIn(handler, username, password, code, uuid);
@@ -155,17 +143,12 @@ public class LoginActivity extends AppCompatActivity {
                 editor.putString("username", username);
                 editor.putString("password", password);
                 editor.commit();
-                //进入设备列表界面
-                Intent intent = new Intent();
-                intent.setClass(LoginActivity.this, DeviceActivity.class);
-                intent.putExtra("token", data.getToken());
-                startActivity(intent);
-            } else {
-                //否则将用户名清除
-                editor.remove("username");
-                editor.remove("password");
-                editor.commit();
             }
+             //进入设备列表界面
+            Intent intent = new Intent();
+            intent.setClass(LoginActivity.this, DeviceActivity.class);
+            intent.putExtra("token", data.getToken());
+            startActivity(intent);
         }
     }
 }

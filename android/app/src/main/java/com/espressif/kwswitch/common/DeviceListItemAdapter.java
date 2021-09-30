@@ -4,6 +4,7 @@ package com.espressif.kwswitch.common;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Handler;
+import android.os.Vibrator;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,11 +12,7 @@ import android.widget.BaseAdapter;
 import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.TextView;
-
-import androidx.constraintlayout.solver.widgets.Helper;
-
 import com.espressif.kwswitch.R;
-
 import java.util.List;
 
 public class DeviceListItemAdapter extends BaseAdapter {
@@ -25,6 +22,7 @@ public class DeviceListItemAdapter extends BaseAdapter {
     private Handler handler;
     private String token;
     private ApiHelper helper;
+    private Context context;
 
     public DeviceListItemAdapter(Context context,List<SwitchDevice> listItems,Handler handler,String token) {
         this.mInflater = LayoutInflater.from(context);
@@ -32,6 +30,7 @@ public class DeviceListItemAdapter extends BaseAdapter {
         this.handler=handler;
         this.token=token;
         this.helper=new ApiHelper();
+        this.context=context;
     }
 
     @Override
@@ -99,6 +98,8 @@ public class DeviceListItemAdapter extends BaseAdapter {
         holder.switchA.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener(){
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                Vibrator v = (Vibrator) context.getSystemService(context.VIBRATOR_SERVICE);
+                v.vibrate(200);
                 //调用开关A接口
                 int switchA=holder.switchA.isChecked()?1:0;
                 int switchB=holder.switchB.isChecked()?1:0;

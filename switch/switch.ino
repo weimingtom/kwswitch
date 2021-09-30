@@ -48,9 +48,9 @@ void setup()
     if (kwswitch.connectWifi())
     {
       //启动MQTT
-      client.setServer(mqtt_server, mqtt_port);
-      client.setCallback(callback);
-      kwswitch.reconnectMqtt(client, deviceId, apiKey, mqtt_user_name, mqtt_pwd);
+      // client.setServer(mqtt_server, mqtt_port);
+      // client.setCallback(callback);
+      // kwswitch.reconnectMqtt(client, deviceId, apiKey, mqtt_user_name, mqtt_pwd);
     }
   }
   kwswitch.printTips("kwswitch start...");
@@ -150,7 +150,7 @@ void loop()
       {
         kwswitch.lastMsg = now;
         //连接失败关闭继电器
-        if(kwswitch.isDisconnect==false) {kwswitch.disconnectSwitchClose();}
+        //if(kwswitch.isDisconnect==false) {kwswitch.disconnectSwitchClose();}
 
         //启动MQTT
         client.setServer(mqtt_server, mqtt_port);
@@ -159,7 +159,7 @@ void loop()
         {
           kwswitch.printTips("mqtt处还原");
           //连接成功后还原状态
-          if(kwswitch.isDisconnect) {kwswitch.connectSwitchRestore();}
+          //if(kwswitch.isDisconnect) {kwswitch.connectSwitchRestore();}
         }
       }
     }

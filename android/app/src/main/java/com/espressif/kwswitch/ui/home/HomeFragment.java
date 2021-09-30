@@ -63,7 +63,7 @@ public class HomeFragment extends Fragment {
                     if(data.getCode()!=200) {
                         Toast.makeText(getActivity(), data.getMsg(), Toast.LENGTH_SHORT).show();
                     }else{
-                        Toast.makeText(getActivity(), "开关指定已发送", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), "开关指令已发送", Toast.LENGTH_SHORT).show();
                     }
                 }
             }

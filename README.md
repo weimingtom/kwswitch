@@ -1,5 +1,5 @@
 
-## 平台简介 [码云最新源码>>](https://gitee.com/kerwincui/kwswitch)
+## 平台简介
 
 　　该智能开关平台包括服务端、硬件端、PC端和安卓端。硬件使用ESP8266模块，成本相对较低，可以发挥想象力，搭配各种传感器，实现自己的智能终端。【------[演示视频看这里 B站传送门](https://www.bilibili.com/video/BV1Qg4y1q7nk?from=search&seid=16334091011357696233)------】
 
@@ -48,7 +48,7 @@
 * 开发工具：Android Studio
     
 #### 硬件端
-* 相关技术： Arduino、ESP8266 Arduino Core、OneButton、IRromoteESP8266、PubSubClient
+* 相关技术： Arduino、 ESP8266 core for Arduino、OneButton、IRromoteESP8266、PubSubClient
 * 开发工具：Arduino IDE、Visual Studio Code
 * 辅助工具：USB转TTL下载线、AC-DC降压模块（可选）、红外遥控模块（可选）、DHT11温湿度传感器（可选）、触控开关（可选）
 * 硬件图片：硬件图片来自贝壳物联官网<br />
@@ -97,6 +97,8 @@ default-character-set=utf8
 [mysql]
 default-character-set=utf8
 EOF
+
+4.可选:设置mysql小写模式，vim /etc/mysql/mysql.conf.d/mysql.cnf，在[mysqld]下加入一行：lower_case_table_names=1
 ```
 
 * redis安装（有密码）
