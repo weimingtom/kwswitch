@@ -57,11 +57,11 @@ spring:
   # redis 配置
   redis:
     # 地址
-    host: 192.168.0.110
+    host: 127.0.0.1
     # 端口，默认为6379
     port: 6379
     # 密码
-    password: 123456
+    password:
     # 连接超时时间
     timeout: 10s
     lettuce:
@@ -76,9 +76,9 @@ spring:
         max-wait: -1ms
   data:
     mongodb:
-      host: 192.168.0.110
+      host: 127.0.0.1
       port: 27017
-      username: kwswitch
+      username: admin
       password: 123456
       database: kwswitch
 
@@ -90,7 +90,7 @@ token:
     secret: abcdefghijklmnopqrstuvwxyz
     # 令牌有效期（默认30分钟）
     expireTime: 30
-  
+
 # MyBatis配置
 mybatis:
     # 搜索指定包别名
@@ -144,3 +144,4 @@ mqtt:
     defaultQos: 1
     completionTimeout: 30000
     consumerTopics: monitor,state # 监听的 topic，多个使用逗号隔开
+

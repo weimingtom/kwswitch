@@ -83,13 +83,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
                 // CRSF禁用，因为不使用session
                 .csrf().disable()
                 // 认证失败处理类
-                .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
+                //.exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
                 // 基于token，所以不需要session
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 // 过滤请求
                 .authorizeRequests()
                 // 对于登录login 验证码captchaImage 允许匿名访问
-                .antMatchers("/login", "/captchaImage").anonymous()
+                .antMatchers("/login", "/captchaImage", "/getInfo").anonymous()
                 .antMatchers(
                         HttpMethod.GET,
                         "/*.html",
@@ -106,12 +106,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
                 .antMatchers("/*/api-docs").anonymous()
                 .antMatchers("/druid/**").anonymous()
                 // 除上面外的所有请求全部需要鉴权认证
-                .anyRequest().authenticated()
+                .anyRequest().anonymous()
                 .and()
+                //允许跨域（添加后解决退出登录跨域问题）
+                //.cors().and()
+                /*
+
+            */
                 .headers().frameOptions().disable();
         httpSecurity.logout().logoutUrl("/logout").logoutSuccessHandler(logoutSuccessHandler);
         // 添加JWT filter
-        httpSecurity.addFilterBefore(authenticationTokenFilter, UsernamePasswordAuthenticationFilter.class);
+        //httpSecurity.addFilterBefore(authenticationTokenFilter, UsernamePasswordAuthenticationFilter.class);
     }
 
     
